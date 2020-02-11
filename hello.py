@@ -1,7 +1,14 @@
+f = open('/Users/a/Desktop/wsy/计算器自做哦eval.html','rb')
+jsj = f.read()
+f.close()
+
+
+
+
 def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/html')])
-    body = '<h1>Hello,%s!<h1>' % (environ['PATH_INFO'][1:] or 'web')
-    return [body.encode('utf-8')]
+    
+    return [jsj]
 
 
 
