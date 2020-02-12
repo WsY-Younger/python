@@ -1,4 +1,4 @@
-f = open('/python/计算器自做哦eval.html','rb')
+f = open('计算器自做哦eval.html','rb')
 jsj = f.read()
 f.close()
 
