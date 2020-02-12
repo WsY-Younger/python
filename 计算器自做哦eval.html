@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="label" class="table" type="text" placeholder=""/><br>
+    <div class="button" onclick="buttonClick(1)">1</div>
+    <div class="button" onclick="buttonClick(2)">2</div>
+    <div class="button" onclick="buttonClick(3)">3</div>
+    <div class="button" onclick="buttonClick('/')">/</div><br>
+    <div class="button" onclick="buttonClick(4)">4</div>
+    <div class="button" onclick="buttonClick(5)">5</div>
+    <div class="button" onclick="buttonClick(6)">6</div>
+    <div class="button" onclick="buttonClick('*')">*</div><br>
+    <div class="button" onclick="buttonClick(7)">7</div>
+    <div class="button" onclick="buttonClick(8)">8</div>
+    <div class="button" onclick="buttonClick(9)">9</div>
+    <div class="button" onclick="buttonClick('+')">+</div><br>
+    <div class="button" onclick="buttonClick(0)">0</div>
+    <div class="button" onclick="buttonClick('.')">.</div>
+    <div class="button" onclick="buttonClick('=')">=</div>
+    <div class="button" onclick="buttonClick('-')">-</div><br>
+    <div id="button" onclick="buttonClick('AC')">AC</div>
+
+    
+</body>
+<script>
+    var input
+    var result
+    function buttonClick(params) {
+        var node = document.getElementById('label')
+        if(params == 'AC') {
+            node.value = ''
+            return
+        }
+        if (params == '=') {
+            result = eval(input)
+            node.value = `${input} = ${result}`
+            return 
+        }
+        input = `${input || ''}${params}`
+        node.value = `${input}`
+    }
+   
+    
+    
+</script>
+<style>
+    div {
+        display: inline;
+    }
+    #button {
+        margin: 5px 15px 15px 5px;
+        line-height: 30px;
+        text-align: center;
+        height: 30px;
+        width: 160px;
+        display: inline-block;
+        background-color: cadetblue;
+        border-radius: 15px 15px 15px 15px ;
+        
+    }
+
+    .button {
+        display: inline-block;
+        background-color: cadetblue;
+        border-radius: 15px 15px 15px 15px ;
+        margin: 5px 5px 5px 5px ;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        text-align: center; 
+    }
+    
+</style>
+</html>
