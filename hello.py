@@ -8,8 +8,7 @@ f.close()
 def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/html')])
     
-    return [jsj]
+    return [jsj]   i just want to be happy,do what you want to do.
 
 
-
-
+   

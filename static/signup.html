@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="input-label">Username</div>
+
+    <input 
+          type="username"
+          id="username"
+          placeholder="Please input username"/>
+    <div class="input-label">Password</div>
+    
+    <input
+        type="PassWord"
+        id="password"
+        placeholder="Please input password"
+    />
+          
+        
+    </div>
+    <div class="button" onclick="buttonClick()">Sign up</div>    
+</body>
+<script>
+    function buttonClick() {
+        reg();
+        return;
+    }
+    function reg() {
+        const usernameNode = document.querySelector("#username");
+        const passwordNode = document.querySelector("#password");
+        const username = usernameNode.value; // 获取用户名
+        const password = passwordNode.value; // 获取密码
+        if (!username) {
+          alert("请输入用户名");
+          return;
+        }
+        if (!password) {
+          alert("请输入密码");
+          return;
+        }
+        var request = new XMLHttpRequest(); // 新建XMLHttpRequest对象 初始化request
+
+        request.onreadystatechange = function() {     // 状态发生变化时，函数被回调
+          if (request.readyState === 4) {  //  readyState 是 4 的时候表明 请求完成
+            // 判断响应结果: 
+            if (request.status === 200) {   // status 是 200 的时候表明请求没有发生错误
+              // 成功，通过responseText拿到响应的文本:
+              const res = JSON.parse(request.responseText); 
+              if (res.code == 'success') {
+                alert('注册成功');
+                window.location.href = '/static/signin.html'
+              } else {
+                alert(request.responseText);    // 把请求结果显示出来
+              
+              }
+              
+
+              
+
+            } else {
+              // 失败，根据响应码判断失败原因:
+              alert("注册失败");
+            }
+          } else {
+            // HTTP请求还在继续...
+          }
+        };
+
+        // 发送注册请求:
+        request.open(
+          "POST",
+          "/signup"
+        );
+        request.setRequestHeader(
+            "Content-type",
+          "application/json"
+        );
+
+        const data = {
+          name: username,
+          password: password
+        }  
+        
+
+        const body = JSON.stringify(data);
+        request.send(body);
+    }
+    
+</script>
+<style>
+    .button {
+        background-color: aqua;
+        width: 70px;
+        height: 40px;
+    }
+</style>
+</html>

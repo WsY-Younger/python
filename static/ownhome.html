@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wel">Welcome!</div>
+    <div class="name">Welcome</div>
+ <script>
+     
+     const cookie = document.cookie;
+     const items = cookie.split(';');
+     const userItem = items.find(e => e.includes('username'));
+     const arr = userItem.split('=');
+     const username = arr[1];
+     const name1Node = document.querySelector('.name')
+     name1Node.innerHTML = username
+
+
+    
+ </script>   
+ 
+</body>
+    
+</script>
+
+</html>
