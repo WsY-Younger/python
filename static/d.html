@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="button3" onclick="buttonClick3()">首页</div>
+    <div class="box" >
+        <input type="username"
+        id="username"
+        placeholder="请输入用户名"/>
+        <input type="password"
+        id="password"
+        placeholder="请输入密码"/>
+        <div class="button1" onclick="buttonClick1()">登录</div>
+        
+
+    </div>
+    <div class="box1">
+        <div class="button2" onclick="buttonClick2()">忘记密码</div>
+        <div class="button4" onclick="buttonClick4()">快去注册</div>
+    </div>
+    
+</body>
+<style>
+    .box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 30%;
+        height: 30%;
+        margin-top: 10%;
+        margin-left: 30%;
+    }
+    #password{
+        margin-top: 10px;
+        border-radius: 3px;       
+        height: 25px;
+        width: 250px;
+        border-width: 0.5px;
+        border-style: solid;
+        border-color: gray;
+    }
+    #username{
+        border-radius: 3px;       
+        height: 25px;
+        width: 250px;
+        border-width: 0.5px;
+        border-style: solid;
+        border-color: grey;
+    }
+    .button1{
+        margin-top: 10px;
+        height: 30px;
+        width: 250px;
+        background-color: dodgerblue;
+        text-align: center;
+        border-radius: 3px;
+        color: floralwhite;
+        font-size: medium;
+    }
+    .button2{
+        text-align: end;
+        font-size: small;
+        margin-top: 15px;
+       
+        color: dodgerblue;
+    }
+    .button3{
+        text-align: end;
+        margin-top: 0px;
+        margin-right: 0px;
+        font-size: small;
+        color: gray;
+    }
+    .box1{
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        text-align: end;
+    }
+    .button4{
+        text-align: end;
+        font-size: small;
+        margin-top: 15px;
+        margin-left:4px ;
+        color: dodgerblue;
+    }
+
+</style>
+<script>
+    function buttonClick1(){
+        login();
+        return;
+    }
+    function login(){
+        const usernameNode = document.querySelector('#username');
+        const passwordNode = document.querySelector('#password');
+        const username = usernameNode.value;
+        const password = passwordNode.value;
+        if (!username){
+        alert("请输入用户名");
+        return;
+        }
+        if (!password){
+            alert("请输入密码");
+        }
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+            if(request.readyState === 4) {
+                if (request.status === 200) {
+                    const login = JSON.parse(request.responseText);
+                    if (login.code == 'success'){
+                        alert('登陆成功')
+                        document.cookie = `${username};path=/`
+                        window.location.href = 'home.html'
+                    }else{
+                        alert(request.responseText)
+                    }
+                }else {
+                   alert('登录失败')
+                }
+            }else{
+                
+            }
+        };
+        request.open("POST","/d");
+        request.setRequestHeader(
+            "Content-type",
+            "application/json"
+        );
+        const data = {
+            name: username,
+            password: password
+        }
+        const body = JSON.stringify(data);
+        request.send(body);
+    }
+    function buttonClick3(){
+        location.assign('home.html')
+    }
+
+    function buttonClick4(){
+        location.assign('z.html')
+    }
+
+</script>
+</body>
+</html>

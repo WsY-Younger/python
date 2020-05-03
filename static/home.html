@@ -6,67 +6,53 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="input-label">Username</div>
-    <input type="Username"
-    id="uassword"/>
-    <div class="input-label">Password</div>
-    <input type="Password"
-    id="username"/>
-
-    <div class="button" onClick="buttonClick()">GO</div>    
-    <script>
-        function buttonClick() {
-            login();
-            return;
-        }
-
-
-        function login() {
-        const usernameNode = document.querySelector("#username");
-        const passwordNode = document.querySelector("#password");
-        const username = usernameNode.value; 
-        const password = passwordNode.value;
-            if (!username) {
-                alert('please input your name');
-                return;
-            }
-            if (!password) {
-                alert('please input your password');
-                return;
-            }
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                if (request.readyState ===4){
-                    if (request.status ===200) {
-                        const login = JSON.parse(request.responseText);
-                        if (login.code =='success') {
-                            alert('登录成功')
-                            window.location.href = '/home.html'
-
-                        } else {
-                            alert(request.responseText)
-                        }
-                    } else {
-                        alert('登陆失败')
-                    }
-
-                } else {
-
-                }
-            };
-            request.open('POST','/signin');
-            request.setRequestHeader(
-                "Content-type",
-                "application/json"
-            );
-            const data = {
-                name: username,
-                password: password
-            }
-            const body = JSON.stringify(data)
-            request.send(body);
-
-        }
-    </script>
+    <div class="box1">
+        <div class="button1" onclick="buttonClick1()">首页</div>
+        <div class="button2" onclick="buttonClick2()">登录</div>
+        <div class="button3" onclick="buttonClick3()">注册</div>
+    </div>
+    <div class="box">
+        <h2>只能好用的车队管理系统</h2>
+        <h4>已入驻34512个企业</h4>
+    </div>
 </body>
+<style>
+    .box1{
+        display: flex;
+        flex-direction: row;
+        font-size: small;
+        text-align: end;
+        color: gray;
+        margin-right: 0px;
+    }
+    .box{
+        align-content: center;
+        justify-content: center;
+        margin-top: 250px;
+        margin-left: 400px;
+    }
+    .button1{
+        margin-left: 10px;
+    }
+    .button2{
+        margin-left: 10px;
+    }
+    .button3{
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+</style>
+<script>
+    function buttonClick2(){
+        
+        location.assign('d.html')
+    }
+    
+    
+    function buttonClick3() {
+        location.assign('z.html')
+        
+    }
+    
+</script>
 </html>

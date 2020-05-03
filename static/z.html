@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="button3" onclick="buttonClick3()">首页</div>
+    <div class="box" >
+        <input type="username"
+        id="username"
+        placeholder="请设置用户名"/>
+        <input type="password"
+        id="password"
+        placeholder="请设置密码"/>
+        <div class="button1" onclick="buttonClick1()">注册</div>
+        <div class="button2" onclick="buttonClick2()">已有帐号,去登陆</div>
+    </div>
+    
+</body>
+<style>
+    .box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 30%;
+        height: 30%;
+        margin-top: 10%;
+        margin-left: 30%;
+    }
+    #password{
+        margin-top: 10px;
+        border-radius: 3px;       
+        height: 25px;
+        width: 250px;
+        border-width: 0.5px;
+        border-style: solid;
+        border-color: gray;
+    }
+    #username{
+        border-radius: 3px;       
+        height: 25px;
+        width: 250px;
+        border-width: 0.5px;
+        border-style: solid;
+        border-color: grey;
+    }
+    .button1{
+        margin-top: 10px;
+        height: 30px;
+        width: 250px;
+        background-color: dodgerblue;
+        text-align: center;
+        border-radius: 3px;
+        color: floralwhite;
+        font-size: medium;
+    }
+    .button2{
+        text-align: end;
+        font-size: small;
+        margin-top: 15px;
+        width:250px ;
+        color: dodgerblue;
+    }
+    .button3{
+        text-align: end;
+        margin-top: 0px;
+        margin-right: 0px;
+        font-size: small;
+        color: gray;
+    }
+</style>
+<script>
+    function buttonClick1(){
+        reg()
+        return;
+    }
+    function reg(){
+        const usernameNode = document.querySelector('#username');
+        const passwordNode = document.querySelector('#password');
+        const username = usernameNode.value;
+        const password = usernameNode.value;
+        if (!username){
+            alert("请设置用户名");
+            return;
+        }
+        if(!password){
+            alert("请设置密码");
+            return;
+        }
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+            if(request.readyState === 4){
+                if (request.status === 200){
+                    const res = JSON.parse(request.responseText);
+                    if (res.code == 'success'){
+                        alert('注册成功');
+                        window.location.href = 'd.html'
+                    }else{
+                        alert(request.responseText);
+                    }
+                }else{
+                    alert("注册失败");
+                }
+            }else{
+
+            }
+        };
+        request.open(
+            "POST",
+            "/z"
+        );
+        request.setRequestHeader(
+            "Content-type",
+            "application/json"
+        );
+        const data = {
+            name: username,
+            password: password
+        }
+        const body = JSON.stringify(data);
+        request.send(body);
+    }
+    function buttonClick3(){
+        location.assign('home.html')
+    }
+    function buttonClick2() {
+        location.assign('d.html')
+    }
+
+</script>
+</html>
